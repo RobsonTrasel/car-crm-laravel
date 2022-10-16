@@ -20,7 +20,7 @@ class AuthController extends Controller
         ]);
 
         if($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 200);
+            return response()->json(['errors' => $validator->errors()], 400);
         };
 
         $date = Carbon::now();
@@ -37,7 +37,7 @@ class AuthController extends Controller
         if($user->id) {
             return response()->json([
                 'access_token' => $user->createToken('auth-api')->accessToken
-            ], 200);
+            ], 400);
         };
 
         return response()->json([
